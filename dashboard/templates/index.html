@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SOC Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/gaugeJS/dist/gauge.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #0b1220;
+            color: white;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card {
+            background: #111a2e;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .status {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .low { color: #22c55e; }
+        .medium { color: #facc15; }
+        .high { color: #ef4444; }
+
+        button {
+            padding: 10px;
+            margin: 5px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .attack-btn { background: red; color: white; }
+        .stop-btn { background: gray; color: white; }
+
+        select {
+            padding: 8px;
+            margin: 5px;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🛡️ Windows SOC Alert Dashboard</h1>
+
+<!-- Attack status banner -->
+<h3 id="attackStatus"></h3>
+
+<div class="grid">
+
+    <!-- RISK PANEL -->
+    <div class="card">
+        <h2>Risk Score</h2>
+
+        <canvas id="gauge" width="250" height="150"></canvas>
+
+        <h1 id="riskScore">{{ risk_score }}</h1>
+        <h3 id="status" class="status">{{ status }}</h3>
+
+        <!-- 🔥 ATTACK CONTROL PANEL -->
+        <hr>
+
+        <h3>🎯 Attack Simulation Control</h3>
+
+        <select id="attackType">
+            <option value="brute_force">Brute Force</option>
+            <option value="credential_stuffing">Credential Stuffing</option>
+            <option value="privilege_escalation">Privilege Escalation</option>
+            <option value="mixed">Mixed Attack</option>
+        </select>
+
+        <select id="severity">
+            <option value="low">Low</option>
+            <option value="medium" selected>Medium</option>
+            <option value="high">High</option>
+            <option value="critical">Critical</option>
+        </select>
+
+        <br>
+
+        <button class="attack-btn" onclick="startCustomAttack()">
+            🚨 Start Attack
+        </button>
+
+        <button class="stop-btn" onclick="stopAttack()">
+            🛑 Stop Attack
+        </button>
+    </div>
+
+    <!-- ALERTS PANEL -->
+    <div class="card" id="alertsCard">
+        <h2>Security Alerts</h2>
+
+        <div id="alerts">
+            {% if alerts %}
+                <ul>
+                {% for alert in alerts %}
+                    <li>⚠️ {{ alert }}</li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>✅ No suspicious activity detected</p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ======================
+    // GAUGE SETUP
+    // ======================
+    var target = document.getElementById('gauge');
+
+    var gauge = new Gauge(target).setOptions({
+        angle: 0,
+        lineWidth: 0.2,
+        radiusScale: 1,
+        pointer: {
+            length: 0.6,
+            strokeWidth: 0.04,
+            color: '#ffffff'
+        },
+        colorStart: '#22c55e',
+        colorStop: '#ef4444',
+        strokeColor: '#2c3e50'
+    });
+
+    gauge.maxValue = 100;
+    gauge.setMinValue(0);
+    gauge.set({{ risk_score }});
+
+    // ======================
+    // ATTACK CONTROLS
+    // ======================
+    async function startCustomAttack() {
+        const type = document.getElementById("attackType").value;
+        const severity = document.getElementById("severity").value;
+
+        await fetch("/api/set-attack", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                type: type,
+                severity: severity
+            })
+        });
+    }
+
+    async function stopAttack() {
+        await fetch("/api/stop-attack");
+    }
+
+    // ======================
+    // LIVE DASHBOARD LOOP
+    // ======================
+    async function updateDashboard() {
+        const response = await fetch("/api/live");
+        const data = await response.json();
+
+        // Risk score
+        document.getElementById("riskScore").innerText = data.risk_score;
+        document.getElementById("status").innerText = data.status;
+
+        // Status colour
+        const statusEl = document.getElementById("status");
+        statusEl.className = "status " + (
+            data.status.includes("LOW") ? "low" :
+            data.status.includes("MEDIUM") ? "medium" : "high"
+        );
+
+        // Gauge update
+        gauge.set(data.risk_score);
+
+        // Attack banner
+        document.getElementById("attackStatus").innerText =
+            data.attack_mode ? "🔥 ATTACK MODE ACTIVE" : "";
+
+        // Alerts
+        const alertBox = document.getElementById("alerts");
+        alertBox.innerHTML = "";
+
+        if (data.alerts.length === 0) {
+            alertBox.innerHTML = "<p>✅ No suspicious activity detected</p>";
+        } else {
+            const ul = document.createElement("ul");
+
+            data.alerts.forEach(alert => {
+                const li = document.createElement("li");
+                li.innerText = "⚠️ " + alert;
+                ul.appendChild(li);
+            });
+
+            alertBox.appendChild(ul);
+        }
+    }
+
+    // Auto refresh every 3 seconds
+    setInterval(updateDashboard, 3000);
+    updateDashboard();
+</script>
+
+</body>
+</html>
