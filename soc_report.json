@@ -1,0 +1,23 @@
+{
+    "generated_at": "2026-05-26 21:16:02",
+    "risk_score": 50,
+    "risk_status": "MEDIUM RISK",
+    "summary": {
+        "total_alerts": 1,
+        "total_incidents": 1
+    },
+    "alerts": [
+        "Abnormally high credential manager activity"
+    ],
+    "incidents": [
+        {
+            "incident_type": "Credential Access Abuse",
+            "severity": "MEDIUM",
+            "event_count": 1,
+            "alerts": [
+                "Abnormally high credential manager activity"
+            ],
+            "timestamp": "2026-05-26 21:16:02"
+        }
+    ]
+}
