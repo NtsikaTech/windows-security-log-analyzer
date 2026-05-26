@@ -132,4 +132,3 @@ This project is designed for:
 ## ⚠️ Disclaimer
 
 This project is intended for **educational and SOC training simulation purposes only**. It does not interact with any real or production security systems.
-```
