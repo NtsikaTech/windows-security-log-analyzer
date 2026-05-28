@@ -129,6 +129,7 @@ This project is designed for:
 
 ---
 
+<<<<<<< HEAD
 ## 📸 Screenshots
 
 ### SOC Analysis Output
