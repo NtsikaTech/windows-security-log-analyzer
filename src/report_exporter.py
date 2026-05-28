@@ -1,4 +1,5 @@
 import json
+import os
 from datetime import datetime
 
 
@@ -19,7 +20,7 @@ def export_soc_report(risk_score, status, alerts, incidents):
         "incidents": incidents
     }
 
-    file_name = "soc_report.json"
+    file_name = "reports/soc_report.json"
 
     with open(file_name, "w") as f:
         json.dump(report, f, indent=4)

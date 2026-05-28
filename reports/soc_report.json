@@ -1,5 +1,5 @@
 {
-    "generated_at": "2026-05-28 18:12:09",
+    "generated_at": "2026-05-28 18:53:54",
     "risk_score": 50,
     "risk_status": "MEDIUM RISK",
     "summary": {
@@ -17,7 +17,7 @@
             "alerts": [
                 "Abnormally high credential manager activity"
             ],
-            "timestamp": "2026-05-28 18:12:09"
+            "timestamp": "2026-05-28 18:53:54"
         }
     ]
 }
