@@ -1,4 +1,4 @@
-# 🛡️ Windows Security Log Analyzer — SOC Simulation Project
+#  Windows Security Log Analyzer — SOC Simulation Project
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue?style=flat-square&logo=python)
 ![Security](https://img.shields.io/badge/Domain-Cybersecurity-red?style=flat-square)
@@ -7,7 +7,7 @@
 
 ---
 
-## 📌 Overview
+##  Overview
 
 The **Windows Security Log Analyzer** is a SOC (Security Operations Center) simulation project built in Python. It replicates core SOC analyst workflows by ingesting Windows Security logs, detecting suspicious activity, correlating incidents, assigning tickets, mapping attack techniques to MITRE ATT&CK, and generating structured security reports.
 
@@ -15,20 +15,20 @@ The **Windows Security Log Analyzer** is a SOC (Security Operations Center) simu
 
 ---
 
-## 🎯 Key Features
+##  Key Features
 
 | Feature | Description |
 |---|---|
-| 🔍 Log Ingestion | Reads and processes Windows Security Event Logs |
-| 🚨 Threat Detection | Identifies brute force, credential access, and privilege escalation |
-| 🧠 Incident Correlation | Groups related alerts into structured incidents |
-| 🧾 SOC Ticketing | Converts incidents into tracked SOC-style tickets |
-| 🧭 MITRE ATT&CK Mapping | Maps detected activity to MITRE techniques |
-| 📊 Report Generation | Exports structured JSON security reports |
+|  Log Ingestion | Reads and processes Windows Security Event Logs |
+|  Threat Detection | Identifies brute force, credential access, and privilege escalation |
+|  Incident Correlation | Groups related alerts into structured incidents |
+|  SOC Ticketing | Converts incidents into tracked SOC-style tickets |
+|  MITRE ATT&CK Mapping | Maps detected activity to MITRE techniques |
+|  Report Generation | Exports structured JSON security reports |
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 ```
 Windows Logs → Analyzer → Alerts → Incident Correlation → Ticket System → MITRE Mapping → JSON Report
@@ -36,7 +36,7 @@ Windows Logs → Analyzer → Alerts → Incident Correlation → Ticket System 
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 windows-security-log-analyzer/
@@ -61,7 +61,7 @@ windows-security-log-analyzer/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Clone the repository
 
@@ -84,7 +84,7 @@ python main.py
 
 ---
 
-## 📊 Example Output
+##  Example Output
 
 ```
 Risk Score : 78 — HIGH RISK
@@ -97,7 +97,7 @@ Report     : reports/soc_report_2024.json exported
 
 ---
 
-## 🧭 MITRE ATT&CK Coverage
+##  MITRE ATT&CK Coverage
 
 | Technique ID | Name | Category |
 |---|---|---|
@@ -107,29 +107,29 @@ Report     : reports/soc_report_2024.json exported
 
 ---
 
-## 🧠 SOC Skills Demonstrated
+##  SOC Skills Demonstrated
 
-- ✅ Windows Security log analysis
-- ✅ Threat detection engineering
-- ✅ Incident correlation and grouping
-- ✅ SOC ticket lifecycle management
-- ✅ MITRE ATT&CK framework application
-- ✅ Structured security reporting and documentation
+-  Windows Security log analysis
+-  Threat detection engineering
+-  Incident correlation and grouping
+-  SOC ticket lifecycle management
+-  MITRE ATT&CK framework application
+-  Structured security reporting and documentation
 
 ---
 
-## 📌 Use Cases
+##  Use Cases
 
 This project is designed for:
 
-- 🎯 SOC Analyst portfolio development
-- 📚 Cybersecurity learning and practice
-- 🖥️ SIEM-style detection simulation
-- 💼 Interview demonstrations and assessments
+-  SOC Analyst portfolio development
+-  Cybersecurity learning and practice
+-  SIEM-style detection simulation
+-  Interview demonstrations and assessments
 
 ---
 
-## 📸 Screenshots
+##  Screenshots
 
 ### SOC Analysis Output
 
@@ -143,6 +143,6 @@ This project is designed for:
 
 ---
 
-## ⚠️ Disclaimer
+##  Disclaimer
 
 This project is intended for **educational and SOC training simulation purposes only**. It does not interact with any real or production security systems.
